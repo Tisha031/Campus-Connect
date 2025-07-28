@@ -1,0 +1,115 @@
+{% extends "staff/base.html" %}
+
+{% load static %}
+
+<!-- css -->
+{% block mainCss %}
+<link rel="stylesheet" href="{% static 'staff/css/filterstudents.css' %}" />
+{% endblock mainCss %}
+
+<!-- title -->
+{% block mainTitle %} Filter Students {% endblock mainTitle %}
+
+<!-- content -->
+{% block mainContent %}
+<div class="container">
+
+  {% if messages %}
+    {% for message in messages %}
+    <div class="message-container">
+      <div class="alert {{message.tags}}">
+        <span class="message">{{ message }}</span>
+        <div class="dismiss {{message.tags}}">Dismiss</div>
+      </div>
+    </div>
+    {% endfor %}
+  {% endif %}
+
+  <div class="bottom">
+    <div class="left">
+      <h2>Filter Students</h2>
+      <form method="post">
+        {% csrf_token %}
+        <!-- Company Dropdown -->
+        <div class="form-section">
+          <label for="company">Select Company:</label>
+          <select name="company" id="company" required>
+              {% for company in companies %}
+              <option value="{{ company.id }}">{{ company.name }}</option>
+              {% endfor %}
+          </select>
+      </div>  
+
+        <!-- Filter by Backlogs -->
+        <div class="form-section">
+          <label for="backlogs">Backlogs</label>
+          <select name="backlogs-condition" id="backlogs-condition">
+            <option value="greater">Greater than</option>
+            <option value="lesser">Lesser than</option>
+            <option value="equal">Equal to</option>
+          </select>
+          <input type="text" name="backlogs" id="backlogs" required />
+        </div>
+
+        <!-- Filter by CGPA -->
+        <div class="form-section">
+          <label for="cgpa">CGPA</label>
+          <select name="cgpa-condition" id="cgpa-condition">
+            <option value="greater">Greater than</option>
+            <option value="lesser">Lesser than</option>
+            <option value="equal">Equal to</option>
+          </select>
+          <input type="text" name="cgpa" id="cgpa" required />
+        </div>
+
+        <button type="submit">Search</button>
+      </form>
+
+      {% if students %}
+      <!-- Email Section -->
+      <form method="post">
+        {% csrf_token %}
+        <div class="form-section">
+          <label for="email-subject">Email Subject:</label>
+          <select name="email-subject" id="email-subject">
+            {% for emailSubj in emailSubjectForStaff %}
+            <option value="{{ emailSubj.subject }}">{{ emailSubj.subject }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <button type="submit" name="send-email">Send Email</button>
+      </form>
+      {% endif %}
+    </div>
+
+    <!-- Display Filtered Students -->
+    {% if filter_applied %}
+      {% if students %}
+      <div class="right">
+        <h2>Filtered Students</h2>
+        <div class="generated-items">
+          <div class="generated-header">
+            <div class="generated-name">Name</div>
+            <div class="generated-email">Email</div>
+            <div class="generated-username">Total Backlogs</div>
+            <div class="generated-username">Current CGPA</div>
+          </div>
+          {% for student in students %}
+          <div class="generated-item">
+            <div class="generated-name">{{ student.student_name }}</div>
+            <div class="generated-username">{{ student.email }}</div>
+            <div class="generated-email">{{ student.total_backlogs }}</div>
+            <div class="generated-email">{{ student.current_cgpa }}</div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+      {% else %}
+      <div class="right">
+        <h2>No students found for this filter.</h2>
+      </div>
+      {% endif %}
+    {% endif %}
+  </div>
+</div>
+{% endblock mainContent %}

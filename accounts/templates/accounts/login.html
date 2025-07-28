@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'accounts/css/register.css'%}" />
+    <title>Login</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="content">
+        {% if messages %} {% for message in messages %}
+        <div class="message-container">
+          <div class="alert {{message.tags}}">
+            <span class="message">{{ message }}</span>
+            <div
+              {%
+              if
+              message.tags
+              %}
+              class="dismiss {{message.tags}}"
+              {%
+              endif
+              %}
+            >
+              Dismiss
+            </div>
+          </div>
+        </div>
+        {% endfor %} {% endif %}
+        <form action="" method="post">
+          <h1>Log In</h1>
+          {% csrf_token %}
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="text" class="form-control" name="email" required />
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input
+              type="password"
+              class="form-control"
+              name="password"
+              required
+            />
+          </div>
+          <div class="primary-button">
+            <button type="submit">Login</button>
+          </div>
+          <p>
+            Forgot your password? <a href="{% url 'password_reset' %}">Reset</a>
+          </p>
+          <p>
+            Don't have an account? <a href="{% url 'register' %}">Register</a>
+          </p>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
+<script src="{% static 'accounts/js/universal.js'%}"></script>

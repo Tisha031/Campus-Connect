@@ -1,0 +1,49 @@
+{% extends "staff/base.html" %}
+
+<!-- css -->
+{% block mainCss %} {% load static %}
+<link rel="stylesheet" href="{% static 'svadmin/css/company.css' %}" />
+{% endblock mainCss %}
+
+<!-- title -->
+{% block mainTitle %} Company {% endblock mainTitle%}
+
+<!-- content -->
+{% block mainContent %}
+<div class="container">
+  
+  
+  <div class="content">
+    
+    {% if getCompany %}
+    <div class="right">
+      <h2>Company Details</h2>
+      <div class="generated-items">
+        <div class="generated-header">
+          <div class="generated-name">Name</div>
+          <div class="generated-username">Address</div>
+          <div class="generated-email">Email</div>
+          <div class="generated-phone">Phone</div>
+        </div>
+        {% for company in getCompany %}
+        <div class="generated-item">
+          <div class="generated-name">{{ company.name }}</div>
+          <div class="generated-username">{{ company.address }}</div>
+          <div class="generated-email">{{ company.email }}</div>
+          <div class="generated-phone">{{ company.phone }}</div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll('.dismiss').forEach(dismissBtn => {
+    dismissBtn.addEventListener('click', function() {
+      this.parentElement.style.display = 'none';  // Hide the alert message
+    });
+  });
+</script>
+{% endblock mainContent %}

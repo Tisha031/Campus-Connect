@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    {% load static %}
+    <title>
+      {% block mainTitle %}{% endblock mainTitle %} | {{PROJECT_NAME}}
+    </title>
+    <link rel="stylesheet" href="{% static 'svadmin/css/base.css'%}" />
+    {% block mainCss %}{% endblock mainCss%}
+  </head>
+  <body>
+    <!--Filter Students-->
+    {% url 'filterstudents' as filterstudents_url %}
+     <!--Company-->
+     {% url 'viewcompanydetails' as viewcompanydetails_url %}
+    <!-- NAVIGATION BAR -->
+    <nav>
+      <!-- IF USER IS LOGGED IN -->
+      <a
+        href="{% url 'filterstudents' %}"
+        class="nav-item {% if request.path == filterstudents_url %} active {% endif %}"
+        >Filter Students</a
+      >
+      <a
+        href="{% url 'viewcompanydetails' %}"
+        class="nav-item {% if request.path == viewcompanydetails_url %} active {% endif %}"
+        >View Company Details</a
+      >
+      
+      <a href="{% url 'logout'%}" class="nav-item">Log Out</a>
+      <!-- IF USER IS NOT LOGGED IN -->
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <div class="main-body">
+      {% block mainContent %}{% endblock mainContent %}
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+      <p>
+        Copyright &copy;
+        <script>
+          document.write(new Date().getFullYear());
+        </script>
+        {{PROJECT_NAME}}
+      </p>
+    </footer>
+  </body>
+</html>
+<script src="{% static 'students/js/universal.js'%}"></script>

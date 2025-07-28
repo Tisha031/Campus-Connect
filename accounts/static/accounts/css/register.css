@@ -1,0 +1,121 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.content {
+  box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.4);
+  padding: 30px;
+  margin: 10px;
+  border-radius: 12px;
+  width: 350px;
+}
+.content h1 {
+  text-align: center;
+}
+.content .form-group label {
+  display: block;
+  font-size: 20px;
+  margin: 10px 0;
+}
+.content .form-group ul {
+  line-height: 1.5;
+  list-style: none;
+}
+
+.content .form-group input {
+  padding: 10px;
+  border-radius: 12px;
+  width: 93%;
+  outline: none;
+  border: 2px solid #aaa;
+}
+.content .form-group input:hover,
+.content .form-group input:focus {
+  border: 2px solid #0a8daa;
+}
+.content .primary-button button {
+  padding: 10px;
+  margin: 10px 0;
+  font-size: 18px;
+  font-weight: bold;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  background-color: #000000;
+  color: rgb(255, 255, 255);
+  border-radius: 12px;
+}
+.content form p {
+  font-size: 18px;
+  color: #414141;
+  margin: 5px 0;
+}
+.content form p a:visited {
+  color: #000000;
+}
+
+/* FLASH MESSAGE*/
+.alert {
+  text-align: center;
+  padding: 8px 10px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.alert.error {
+  background-color: #cc0000;
+  color: white;
+}
+.alert.success {
+  background-color: #007e33;
+  color: white;
+}
+.alert.warning {
+  background-color: #ffaa48;
+  color: black;
+}
+.alert .message {
+  flex-grow: 1;
+}
+.alert .dismiss {
+  cursor: pointer;
+  padding: 5px 10px;
+  border-radius: 5px;
+  margin-left: 30px;
+  transition: opacity 0.2s;
+  opacity: 1;
+}
+.alert .dismiss:hover {
+  opacity: 0.8;
+}
+
+.alert .dismiss.success {
+  background-color: #004e1f;
+  color: white;
+}
+
+.alert .dismiss.warning {
+  background-color: #b96300;
+  color: white;
+}
+
+.alert .dismiss.error {
+  background-color: #800000;
+  color: white;
+}
+
+@media screen and (max-width: 768px) {
+  .content {
+    margin: 30px;
+  }
+}
