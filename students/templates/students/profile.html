@@ -1,0 +1,148 @@
+{% extends "students/baseTemplate.html" %}
+
+<!-- css -->
+{% block mainCss %} {% load static %}
+<link rel="stylesheet" href="{% static 'students/css/profile.css' %}" />
+{% endblock mainCss %}
+
+<!-- title -->
+{% block mainTitle %} ProfilePage {% endblock mainTitle%}
+
+<!-- content -->
+{% block mainContent %}
+<div class="container">
+  {% if messages %} {% for message in messages %}
+  <div class="message-container">
+    <div class="alert {{message.tags}}">
+      <span class="message">{{ message }}</span>
+      <div {% if message.tags %} class="dismiss {{message.tags}}" {% endif %}>
+        Dismiss
+      </div>
+    </div>
+  </div>
+  {% endfor %} {% endif %}
+  <div class="content">
+    <div class="profile-picture">
+      {% if userdetails %}
+      <img
+        src="{% static 'students/images/userspic/' %}{{userdetails.profilepic}}"
+        alt="profile"
+      />
+      {% else %}
+      <img
+        src="{% static 'students/images/webimage/svit.png' %}"
+        alt="profile"
+      />
+      {% endif %}
+    </div>
+    <h2>Profile</h2>
+    <div class="divider"></div>
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input
+          type="text"
+          class="form-control"
+          name="name"
+          id="name"
+          value="{{userdetails.name}}"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input
+          type="email"
+          class="form-control"
+          name="email"
+          id="email"
+          value="{{ user.email }}"
+          disabled
+          required
+        />
+      </div>
+      <div class="form-group">
+        <label for="mobile">Phone Number</label>
+        <input
+          type="number"
+          class="form-control"
+          name="mobile"
+          id="mobile"
+          value="{{userdetails.mobile}}"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <label for="pincode">Pin Code</label>
+        <input
+          type="number"
+          class="form-control"
+          name="pincode"
+          id="pincode"
+          value="{{userdetails.pincode}}"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="profilepic"
+          >Profile Picture
+          <span>Maximum Image Size is less than 2MB</span>
+        </label>
+
+        <input
+          type="file"
+          class="form-control"
+          name="profilepic"
+          id="profilepic"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="dob">Date Of Birth</label>
+        <input
+          type="date"
+          class="form-control"
+          name="dob"
+          id="dob"
+          value="{{ userdetails.dob|date:'Y-m-d' }}"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="paddress">Permanent Address</label>
+        <textarea
+          name="paddress"
+          id="paddress"
+          class="form-control"
+          cols="40"
+          rows="5"
+          required
+        >
+{{userdetails.paddress}}</textarea
+        >
+      </div>
+      <div class="form-group">
+        <label for="caddress">Current Address</label>
+        <textarea
+          name="caddress"
+          class="form-control"
+          id="caddress"
+          cols="40"
+          rows="5"
+          required
+        >
+{{userdetails.caddress}}</textarea
+        >
+      </div>
+
+      <div class="primary-button">
+        <button type="submit">Update Profile</button>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock mainContent %}

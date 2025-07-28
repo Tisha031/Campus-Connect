@@ -1,0 +1,83 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.content {
+  padding: 30px;
+  border-radius: 12px;
+  margin: 40px;
+  box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.4);
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+}
+
+.content .profile-picture {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin: 10px;
+}
+.content .profile-picture img {
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #2eafac;
+  padding: 5px;
+}
+
+.content h2 {
+  text-align: center;
+}
+.content .divider {
+  height: 2px;
+  margin: 10px 0;
+  background-color: rgb(0, 0, 0);
+  width: 100%;
+}
+
+.content form {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+.content .form-group label {
+  display: block;
+  margin: 10px 0;
+}
+
+.content .form-group label span {
+  font-size: 12px;
+  color: red;
+  margin-right: 10px;
+}
+
+.content .form-group input,
+.content .form-group textarea {
+  padding: 6px;
+  border-radius: 12px;
+  outline: none;
+  border: 2px solid #aaa;
+  padding-left: 10px;
+  margin-right: 10px;
+}
+.content .form-group textarea {
+  resize: none;
+  width: 400px;
+}
+
+@media screen and (max-width: 768px) {
+  .content .form-group input {
+    width: 80%;
+  }
+  .content .form-group textarea {
+    width: 250px;
+  }
+}

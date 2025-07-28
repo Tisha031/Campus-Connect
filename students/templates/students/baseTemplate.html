@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    {% load static %}
+    <title>
+      {% block mainTitle %}{% endblock mainTitle %} | {{PROJECT_NAME}}
+    </title>
+    <link rel="stylesheet" href="{% static 'students/css/base.css'%}" />
+    {% block mainCss %}{% endblock mainCss%}
+  </head>
+  <body>
+    {% url 'home' as home_url %}
+    <!--Profile-->
+    {% url 'profile' as profile_url %}
+    <!--Academic-->
+    {% url 'academicdetails' as academicdetails_url %}
+    <!-- NAVIGATION BAR -->
+    <nav>
+      <!-- IF USER IS LOGGED IN -->
+      <a
+        href="{% url 'home' %}"
+        class="nav-item {% if request.path == home_url %} active {% endif %}"
+        >Home</a
+      >
+      <a
+        href="{% url 'profile' %}"
+        class="nav-item {% if request.path == profile_url %} active {% endif %}"
+        >Profile</a
+      >
+      <a
+        href="{% url 'academicdetails' %}"
+        class="nav-item {% if request.path == academicdetails_url %} active {% endif %}"
+        >Academic Details</a
+      >
+      <a href="{% url 'logout'%}" class="nav-item">Log Out</a>
+      <!-- IF USER IS NOT LOGGED IN -->
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <div class="main-body">
+      {% block mainContent %}{% endblock mainContent %}
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+      <p>
+        Copyright &copy;
+        <script>
+          document.write(new Date().getFullYear());
+        </script>
+        {{PROJECT_NAME}}
+      </p>
+    </footer>
+  </body>
+</html>
+<script src="{% static 'students/js/universal.js'%}"></script>
+{% block footerJS %}{% endblock footerJS %}

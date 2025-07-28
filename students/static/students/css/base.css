@@ -1,0 +1,113 @@
+* {
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background-color: #2eafac;
+  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.2);
+}
+
+nav .nav-item {
+  color: #ffffff;
+  border-radius: 12px;
+  padding: 10px;
+  margin: 0 10px;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+nav .nav-item.active {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+.main-body {
+  min-height: 100vh;
+}
+
+footer {
+  font-size: 18px;
+  padding: 20px;
+  text-align: center;
+  color: #ffffff;
+  background-color: #000000;
+}
+.primary-button button,
+.primary-button a {
+  margin: 10px 0;
+  padding: 10px 30px;
+  border-radius: 12px;
+  background-color: black;
+  color: white;
+  outline: none;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* FLASH MESSAGE*/
+.alert {
+  text-align: center;
+  padding: 8px 10px;
+  border-radius: 10px;
+  margin: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.alert.error {
+  background-color: #cc0000;
+  color: white;
+}
+.alert.success {
+  background-color: #007e33;
+  color: white;
+}
+.alert.warning {
+  background-color: #ffaa48;
+  color: black;
+}
+.alert .message {
+  flex-grow: 1;
+}
+.alert .dismiss {
+  cursor: pointer;
+  padding: 5px 10px;
+  border-radius: 5px;
+  margin-left: 30px;
+  transition: opacity 0.2s;
+  opacity: 1;
+}
+.alert .dismiss:hover {
+  opacity: 0.8;
+}
+
+.alert .dismiss.success {
+  background-color: #004e1f;
+  color: white;
+}
+
+.alert .dismiss.warning {
+  background-color: #b96300;
+  color: white;
+}
+
+.alert .dismiss.error {
+  background-color: #800000;
+  color: white;
+}
+
+@media screen and (max-width: 768px) {
+  nav .nav-item {
+    padding: 5px;
+    margin: 0 5px;
+    font-size: 16px;
+  }
+}

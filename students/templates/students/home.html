@@ -1,0 +1,61 @@
+{% extends "students/baseTemplate.html" %}
+
+<!-- title -->
+{% block mainTitle %} Home {% endblock mainTitle %} {% load static %}
+<!--css-->
+{% block mainCss %}
+<link rel="stylesheet" href="{% static 'students/css/home.css' %}" />
+{% endblock mainCss %}
+
+<!-- content -->
+{% block mainContent %} {% if messages %} {% for message in messages %}
+<div class="message-container">
+  <div class="alert {{message.tags}}">
+    <span class="message">{{ message }}</span>
+    <div {% if message.tags %} class="dismiss {{message.tags}}" {% endif %}>
+      Dismiss
+    </div>
+  </div>
+</div>
+{% endfor %} {% endif %}
+<!-- userdetails-->
+{% if userdetails %}
+<div class="container">
+  <!-- Profile Section -->
+  <div class="profile-section">
+    <h2>Profile Details</h2>
+    <div class="profile-details">
+      <img
+        src="{% static 'students/images/userspic/' %}{{userdetails.profilepic}}"
+        alt="Profile Picture"
+      />
+      <div>
+        <p>Name: {{ userdetails.name }}</p>
+        <p>Email: {{ user.email }}</p>
+        <p>Date of Birth: {{ userdetails.dob }}</p>
+      </div>
+    </div>
+  </div>
+  {% if detail %}
+  <!-- Academic Details Section -->
+  <div class="academic-section">
+    <h2>Academic Details</h2>
+    {% for detail in academicDetails %}
+    <div class="academic-details">
+      <p>Semester: {{ detail.semester }}</p>
+      <p>Backlogs: {{ detail.backlogs }}</p>
+      <p>CGPA: {{ detail.cgpa }}</p>
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+</div>
+{% else %}
+<div class="container">
+  <h2 class="unft">Welcome to Student Portal</h2>
+  <p class="unfc">To view your details, Please update your profile.</p>
+  <div class="primary-button">
+    <a href="{% url 'profile' %}">Update Profile</a>
+  </div>
+</div>
+{% endif %} {% endblock mainContent %}
