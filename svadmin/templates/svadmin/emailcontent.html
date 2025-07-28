@@ -1,0 +1,97 @@
+{% extends "svadmin/baseTemplate.html" %}
+
+<!-- title -->
+{% block mainTitle %} Email Content {% endblock mainTitle %}
+<!-- css -->
+{% block mainCss %} {% load static %}
+<link rel="stylesheet" href="{% static 'svadmin/css/generatestaff.css' %}" />
+{% endblock mainCss %}
+
+<!-- content -->
+{% block mainContent %}
+<div class="container">
+  {% if messages %} {% for message in messages %}
+  <div class="message-container">
+    <div class="alert {{message.tags}}">
+      <span class="message">{{ message }}</span>
+      <div {% if message.tags %} class="dismiss {{message.tags}}" {% endif %}>
+        Dismiss
+      </div>
+    </div>
+  </div>
+  {% endfor %} {% endif %}
+  <div class="content">
+    <div class="left">
+      <form method="POST">
+        <h2>Set Email Content</h2>
+        {% csrf_token %}
+        <div class="form-group">
+          <label for="company-id">Select Company</label>
+          <select name="company-id" id="company-id" class="form-control">
+              {% for company in companies %}
+                  <option value="{{ company.id }}">{{ company.name }}</option>
+              {% endfor %}
+          </select>
+      </div>   
+        <div class="form-group">
+          <label for="subject">Subject</label>
+          <input
+            type="text"
+            class="form-control"
+            id="subject"
+            name="subject"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="venue">Venue</label>
+          <input
+            type="text"
+            class="form-control"
+            id="venue"
+            name="venue"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="date">date</label>
+          <input
+            type="datetime-local"
+            class="form-control"
+            id="date"
+            name="date"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="body">Email Body</label>
+          <textarea name="body" id="body" cols="41" rows="10"></textarea>
+        </div>
+        <div class="primary-button">
+          <button type="submit">Generate</button>
+        </div>
+      </form>
+    </div>{% if getEmailContent %}
+    <div class="right">
+      <h2>Generated Email Content</h2>
+      <div class="generated-items">
+        <div class="generated-header">
+          <div class="generated-name">Subject</div>
+          <div class="generated-username">Date</div>
+          <div class="generated-email">Venue</div>
+        </div>
+        {% for oneContent in getEmailContent %}
+        <div class="generated-item">
+          <div class="generated-name">{{ oneContent.subject }}</div>
+          <div class="generated-username">{{ oneContent.date }}</div>
+          <div class="generated-email">{{ oneContent.venue }}</div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+  </div>
+</div>
+
+{% endblock mainContent %}

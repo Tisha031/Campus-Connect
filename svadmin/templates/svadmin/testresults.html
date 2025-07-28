@@ -1,0 +1,40 @@
+{% extends "svadmin/baseTemplate.html" %}
+
+{% load static %}
+
+{% block mainCss %}
+<link rel="stylesheet" href="{% static 'svadmin/css/testresults.css' %}" />
+{% endblock mainCss %}
+
+{% block mainTitle %}Test Results{% endblock mainTitle %}
+
+{% block mainContent %}
+<div class="container">
+    <h2>Test Results</h2>
+    <div class="generated-items">
+        <!-- Header for columns -->
+        <div class="generated-header">
+            <div class="generated">Company Name</div>
+            <div class="generated">Test Date</div>
+            <div class="generated">Venue</div>
+        </div>
+
+        <!-- Loop through each company and display their test results -->
+        {% for company in companyDetails %}
+        <div class="generated-item">
+            <!-- Company name displayed once -->
+            <div class="generated-name">
+                <a href="{% url 'company_detail' company.id %}">{{ company.name }}</a>
+            </div>
+
+            <!-- Loop over the emails associated with this company -->
+            {% for email in company.email_contents.all %}
+            <div class="generated-date">{{ email.date }}</div>
+            <div class="generated-venue">{{ email.venue }}</div>
+            {% endfor %}
+
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock mainContent %}

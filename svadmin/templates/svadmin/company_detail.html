@@ -1,0 +1,85 @@
+{% extends "svadmin/baseTemplate.html" %}
+
+{% load static %}
+
+{% block mainCss %}
+<link rel="stylesheet" href="{% static 'svadmin/css/company_detail.css' %}">
+{% endblock mainCss %}
+
+{% block mainTitle %}Company Details{% endblock mainTitle %}
+
+{% block mainContent %}
+<div class="container">
+  <h2>Eligible Students for {{ company.name }}</h2>
+
+  {% if messages %}
+    <div class="message-container">
+      {% for message in messages %}
+      <div class="alert {{message.tags}}">
+        <span class="message">{{ message }}</span>
+        <button class="dismiss-btn" onclick="this.parentElement.style.display='none';">Dismiss</button>
+      </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  <form method="POST">
+    {% csrf_token %}
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Student Name</th>
+            <th>Email</th>
+            <th>Test Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for association in student_associations %}
+          <tr>
+            <td>{{ association.student.name }}</td>
+            <td>{{ association.student.user.email }}</td>
+            <td>
+              <div class="radio-group">
+                <div>
+                  <input
+                    type="radio"
+                    id="pass-{{ association.id }}"
+                    name="status-{{ association.id }}"
+                    value="pass"
+                    {% if association.test_status == 'pass' %}checked{% endif %}
+                  />
+                  <label for="pass-{{ association.id }}">Pass</label>
+                </div>
+                <div>
+                  <input
+                    type="radio"
+                    id="fail-{{ association.id }}"
+                    name="status-{{ association.id }}"
+                    value="fail"
+                    {% if association.test_status == 'fail' %}checked{% endif %}
+                  />
+                  <label for="fail-{{ association.id }}">Fail</label>
+                </div>
+                <div>
+                  <input
+                    type="radio"
+                    id="not-appeared-{{ association.id }}"
+                    name="status-{{ association.id }}"
+                    value="not_appeared"
+                    {% if association.test_status == 'not_appeared' %}checked{% endif %}
+                  />
+                  <label for="not-appeared-{{ association.id }}">Not Appeared</label>
+                </div>
+              </div>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    <button type="submit">Update Results and Send Emails</button>
+  </form>
+</div>
+{% endblock mainContent %}

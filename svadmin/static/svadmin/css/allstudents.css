@@ -1,0 +1,41 @@
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: 20px;
+}
+
+.generated-items {
+  width: 100%;
+  margin-top: 20px;
+}
+
+.generated-header {
+  display: flex;
+  justify-content: space-between;
+  background-color: #f0f0f0;
+  padding: 10px;
+  border-radius: 8px 8px 0 0;
+}
+
+.generated-header div {
+  flex: 1;
+  text-align: center;
+  font-weight: bold;
+}
+
+.generated-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-top: none;
+  border-radius: 0 0 8px 8px;
+}
+
+.generated-item div {
+  flex: 1;
+  text-align: center;
+}

@@ -1,0 +1,31 @@
+{% extends "svadmin/baseTemplate.html" %}
+
+{% load static %}
+
+{% block mainCss %}
+<link rel="stylesheet" href="{% static 'svadmin/css/allstudents.css' %}" />
+{% endblock mainCss %}
+
+{% block mainTitle %}All Students{% endblock mainTitle %}
+
+{% block mainContent %}
+<div class="container">
+    <h2>All Students</h2>
+    <div class="generated-items">
+        <div class="generated-header">
+            <div class="generated">Name</div>
+            <div class="generated">Mobile</div>
+            <div class="generated">Pin Code</div>
+        </div>
+        {% for student in studentDetails %}
+        <div class="generated-item">
+            <div class="generated-name">
+                <a href="{% url 'student_detail' student.user.username %}">{{ student.name }}</a>
+            </div>
+            <div class="generated-mobile">{{ student.mobile }}</div>
+            <div class="generated-username">{{ student.pincode }}</div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock mainContent %}

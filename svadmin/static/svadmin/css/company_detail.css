@@ -1,0 +1,42 @@
+/* Flash Message Styles */
+.alert {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-radius: 8px;
+    margin: 10px 0;
+    font-size: 14px;
+  }
+  
+  .alert.success {
+    background-color: #007e33;
+    color: white;
+  }
+  
+  .alert.error {
+    background-color: #cc0000;
+    color: white;
+  }
+  
+  .alert.warning {
+    background-color: #ffaa48;
+    color: black;
+  }
+  
+  /* Dismiss Button Styles */
+  .dismiss-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: background 0.2s ease-in-out;
+  }
+  
+  .dismiss-btn:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+  }
+  

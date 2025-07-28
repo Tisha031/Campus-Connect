@@ -1,0 +1,54 @@
+{% extends "svadmin/baseTemplate.html" %}
+
+{% load static %}
+
+{% block mainCss %}
+<link rel="stylesheet" href="{% static 'svadmin/css/student_detail.css' %}" />
+{% endblock mainCss %}
+
+{% block mainTitle %}Student Details{% endblock mainTitle %}
+
+{% block mainContent %}
+<div class="container">
+    <h2>Student Details</h2>
+    
+    <div class="student-info">
+        <h3>Name: {{ student.name }}</h3>
+        <p><strong>Mobile:</strong> {{ student.mobile }}</p>
+        <p><strong>Pin Code:</strong> {{ student.pincode }}</p>
+        <p><strong>Date of Birth:</strong> {{ student.dob }}</p>
+        <p><strong>Permanent Address:</strong> {{ student.paddress }}</p>
+        <p><strong>Current Address:</strong> {{ student.caddress }}</p>
+    </div>
+
+    <div class="academic-info">
+        <h3>Academic Details</h3>
+        {% if academic_details %}
+            <div class="academic-details">
+                <div class="generated-header">
+                    <div class="generated-course">Course</div>
+                    <div class="generated-sem">Semester</div>
+                    <div class="generated-cgpa">CGPA</div>
+                    <div class="generated-backlog">Backlog</div>
+                    <div class="generated-marks">Marks</div>
+                </div>
+                {% for academic in academic_details %}
+                    <div class="generated-item">
+                        <div class="generated-course">{{ academic.course }}</div>
+                        <div class="generated-sem">{{ academic.sem }}</div>
+                        <div class="generated-cgpa">{{ academic.cgpa }}</div>
+                        <div class="generated-backlog">{{ academic.backlog }}</div>
+                        <div class="generated-marks">{{ academic.marks }}</div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p>No academic details available.</p>
+        {% endif %}
+    </div>
+
+    <div class="actions">
+        <a href="{% url 'allstudents' %}" class="btn">Back to All Students</a>
+    </div>
+</div>
+{% endblock mainContent %}

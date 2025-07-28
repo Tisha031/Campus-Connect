@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    {% load static %}
+    <title>
+      {% block mainTitle %}{% endblock mainTitle %} | {{PROJECT_NAME}}
+    </title>
+    <link rel="stylesheet" href="{% static 'svadmin/css/base.css'%}" />
+    {% block mainCss %}{% endblock mainCss%}
+  </head>
+  <body>
+    {% url 'svadmin' as svadmin_url %}
+    <!--Generate Staff-->
+    {% url 'generatestaff' as generatestaff_url %}
+     <!--Company-->
+     {% url 'company' as company %}
+    <!--Email-->
+    {% url 'emailcontent' as emailcontent_url %}
+    <!--Students-->
+    {% url 'allstudents' as allstudents_url %}
+     <!--Test Results-->
+     {% url 'testresults' as testresults_url %}
+    <!-- NAVIGATION BAR -->
+    <nav>
+      <!-- IF USER IS LOGGED IN -->
+      <a
+        href="{% url 'svadmin' %}"
+        class="nav-item {% if request.path == svadmin_url %} active {% endif %}"
+        >Home</a
+      >
+      <a
+        href="{% url 'generatestaff' %}"
+        class="nav-item {% if request.path == generatestaff_url %} active {% endif %}"
+        >Staff</a
+      >
+      <a
+      href="{% url 'company' %}"
+      class="nav-item {% if request.path == company %} active {% endif %}"
+      >Company</a
+    >
+      <a
+        href="{% url 'allstudents' %}"
+        class="nav-item {% if request.path == allstudents_url %} active {% endif %}"
+        >Students</a
+      >
+      <a
+        href="{% url 'testresults' %}"
+        class="nav-item {% if request.path == testresults_url %} active {% endif %}"
+        >Test Results</a
+      >
+      <a
+        href="{% url 'emailcontent' %}"
+        class="nav-item {% if request.path == emailcontent_url %} active {% endif %}"
+        >Email Content</a
+      >
+      <a href="{% url 'logout'%}" class="nav-item">Log Out</a>
+      <!-- IF USER IS NOT LOGGED IN -->
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <div class="main-body">
+      {% block mainContent %}{% endblock mainContent %}
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+      <p>
+        Copyright &copy;
+        <script>
+          document.write(new Date().getFullYear());
+        </script>
+        {{PROJECT_NAME}}
+      </p>
+    </footer>
+  </body>
+</html>
+<script src="{% static 'students/js/universal.js'%}"></script>

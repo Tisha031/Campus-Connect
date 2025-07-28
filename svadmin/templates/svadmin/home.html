@@ -1,0 +1,27 @@
+{% extends "svadmin/baseTemplate.html" %}
+
+<!-- title -->
+{% block mainTitle %} Home {% endblock mainTitle %}
+
+<!--css-->
+{% load static %}
+{% block mainCss %}
+<link rel="stylesheet" href="{% static 'svadmin/css/home.css'%}"/>
+{% endblock mainCss %}
+<!-- content -->
+{% block mainContent %}
+<div class="container">
+  {% for infoCard in infoCards %}
+  <div class="info-box-outer">
+    <a href="{{infoCard.url}}">
+      <div class="info-box">
+        <div class="info-meta-container">
+          <div class="info-title">{{infoCard.title}}</div>
+          <div class="info-value">{{infoCard.value}}</div>
+        </div>
+      </div>
+    </a>
+  </div>
+  {% endfor %}
+</div>
+{% endblock mainContent %}

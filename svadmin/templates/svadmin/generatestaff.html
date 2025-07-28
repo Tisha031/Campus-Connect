@@ -1,0 +1,106 @@
+{% extends "svadmin/baseTemplate.html" %}
+
+<!-- css -->
+{% block mainCss %} {% load static %}
+<link rel="stylesheet" href="{% static 'svadmin/css/generatestaff.css' %}" />
+{% endblock mainCss %}
+
+<!-- title -->
+{% block mainTitle %} Generate Staff {% endblock mainTitle%}
+
+<!-- content -->
+{% block mainContent %}
+<div class="container">
+  {% if messages %} {% for message in messages %}
+  <div class="message-container">
+    <div class="alert {{message.tags}}">
+      <span class="message">{{ message }}</span>
+      <div {% if message.tags %} class="dismiss {{message.tags}}" {% endif %}>
+        Dismiss
+      </div>
+    </div>
+  </div>
+  {% endfor %} {% endif %}
+  <div class="content">
+    <div class="left">
+      <form method="POST">
+        <h2>Generate Staff Credentials</h2>
+        {% csrf_token %}
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="name"
+            name="name"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input
+            type="text"
+            class="form-control"
+            id="username"
+            name="username"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input
+            type="email"
+            class="form-control"
+            id="email"
+            name="email"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input
+            type="password"
+            class="form-control"
+            name="password"
+            id="password"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="cpassword">Confirm Password</label>
+          <input
+            type="password"
+            class="form-control"
+            name="cpassword"
+            id="cpassword"
+            required
+          />
+        </div>
+        <div class="primary-button">
+          <button type="submit">Generate</button>
+        </div>
+      </form>
+    </div>
+    {% if getStaff %}
+    <div class="right">
+      <h2>Generated Staff Credentials</h2>
+      <div class="generated-items">
+        <div class="generated-header">
+          <div class="generated-name">Name</div>
+          <div class="generated-username">Username</div>
+          <div class="generated-email">Email</div>
+        </div>
+        {% for staff in getStaff %}
+        <div class="generated-item">
+          <div class="generated-name">{{ staff.first_name }}</div>
+          <div class="generated-username">{{ staff.username }}</div>
+          <div class="generated-email">{{ staff.email }}</div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+  </div>
+</div>
+{% endblock mainContent %}
